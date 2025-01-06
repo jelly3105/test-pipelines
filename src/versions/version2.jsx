@@ -6,4 +6,4 @@ function Version2() {
     );
   }
   
-  export default Version2;
+export default Version2;
