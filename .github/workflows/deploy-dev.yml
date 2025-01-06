@@ -17,7 +17,7 @@ jobs:
  # You should configure this environment as close as possible to the production environment, e.g. using Ubuntu for Linux apps, using the same Node version
   build:
     runs-on: ubuntu-latest
-    if: github.event.inputs.branch != 'main'
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
 
