@@ -62,14 +62,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-    #   - name: "Deploy to Azure Web App(uat)"
-    #     id: deploy-to-webapp
-    #     uses: azure/webapps-deploy@v2
-    #     with:
-    #       app-name: test-pipeline-uat
-    #       # slot-name: 'Production'
-    #       publish-profile: ${{ secrets.AZUREAPPSERVICE_UAT_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
-    #       package: .
+      - name: "Deploy to Azure Web App(uat)"
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: test-pipeline-uat
+          # slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_UAT_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
+          package: .
 
   deploy-prod:
     runs-on: ubuntu-latest
@@ -83,11 +83,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-    #   - name: "Deploy to Azure Web App(prod)"
-    #     id: deploy-to-webapp
-    #     uses: azure/webapps-deploy@v2
-    #     with:
-    #       app-name: test-pipeline-prod
-    #       slot-name: "Production"
-    #       publish-profile: ${{ secrets.AZUREAPPSERVICE_PROD_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
-    #       package: .
+      - name: "Deploy to Azure Web App(prod)"
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: test-pipeline-prod
+          slot-name: "Production"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PROD_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
+          package: .
