@@ -15,9 +15,20 @@ on:
 jobs:
  # Builds the application for production. 
  # You should configure this environment as close as possible to the production environment, e.g. using Ubuntu for Linux apps, using the same Node version
+  fail-if-manual-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if workflow is manually triggered on main
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && "${{ github.ref_name }}" == "main" ]]; then
+            echo "Manual trigger on main branch is not allowed."
+            exit 1
+          else
+            echo "Workflow is running as expected."
+          fi
+
   build:
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v3
 
