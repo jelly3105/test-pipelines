@@ -3,6 +3,7 @@ function Version1() {
       <>
         <h1>Added Version 1. Change 1</h1>
         <h2>Bug fixed!!!</h2>
+        <h2><b>Fixed second bug!!</b></h2>
       </>
     );
   }
