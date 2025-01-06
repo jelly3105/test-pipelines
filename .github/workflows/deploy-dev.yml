@@ -1,5 +1,4 @@
-name: Build and deploy Node.js app to Azure Web App - test-pipeline-dev
-
+name: Deploy to Dev
 # Run the workflow whenever change is pushed into the main branch
 on:
   push:
