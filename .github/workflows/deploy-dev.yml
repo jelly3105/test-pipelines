@@ -4,7 +4,8 @@ name: Build and deploy Node.js app to Azure Web App - test-pipeline-dev
 on:
   push:
     branches:
-      - main
+      - feature1
+      - feature2
   workflow_dispatch:
 
 # Optional: environment variables can be injected here
@@ -39,11 +40,11 @@ jobs:
           path: dist # This should be your distribution path, not the root path
  
  # Deploy the application to Azure
-  deploy:
+  deploy-dev:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'DevTest'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -51,11 +52,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: node-app
-      - name: 'Deploy to Azure Web App'
+      - name: 'Deploy to Azure Web App(dev)'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
             app-name: test-pipeline-dev
-            slot-name: 'Production'
-            publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
+            # slot-name: 'Production'
+            publish-profile: ${{ secrets.AZUREAPPSERVICE_DEV_PUBLISHPROFILE }} # Publish profile should always be stored as secrets in your repository Settings - Secrets and variables - Actions - secrets
             package: .
